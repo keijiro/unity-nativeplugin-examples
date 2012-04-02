@@ -1,0 +1,1 @@
+Add MapKit framework to "Build Phases"/"Link Binary With Libraries" within Xcode target settings.
