@@ -37,6 +37,25 @@ static function Hide() {
     }
 }
 
+#elif UNITY_ANDROID && !UNITY_EDITOR
+
+static function Show(margins : int[], latitude : double, longtitude : double) {
+    var uriString = "geo:" + latitude + "," + longtitude + "?z=20";
+    // uri = Uri.parse(uriString);
+    var uriClass = AndroidJavaClass("android.net.Uri");
+    var uri = uriClass.CallStatic.<AndroidJavaObject>("parse", uriString);
+    // Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+    var intent = AndroidJavaObject("android.content.Intent", "android.intent.action.VIEW", uri);
+    // UnityPlayer.currentActivity.startActivity(intent);
+    var unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+    var currentActivity = unityPlayerClass.GetStatic.<AndroidJavaObject>("currentActivity");
+    currentActivity.Call("startActivity", intent);
+}
+
+static function Hide() {
+    Debug.Log("Not implemented.");
+}
+
 #else
 
 static function Show(margins : int[], latitude : double, longtitude : double) {
