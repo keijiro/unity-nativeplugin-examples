@@ -1,7 +1,5 @@
 #pragma strict
 
-import System.Runtime.InteropServices;
-
 #if UNITY_ANDROID && !UNITY_EDITOR
 
 static function Show(margins : int[], latitude : double, longtitude : double) {
